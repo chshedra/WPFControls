@@ -1,0 +1,54 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="clr-namespace:WPFControls">
+
+	<Style x:Key="EmptyBackgroundButton">
+		<Setter Property="Button.Background" Value="Transparent" />
+		<Setter Property="Button.BorderThickness" Value="0" />
+	</Style>
+
+	<DataTemplate x:Key="ListBoxItemTemplate">
+		<Grid Name ="ListViewItemGrid"
+		      Background="Transparent"> 
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition Width="20"/>
+			</Grid.ColumnDefinitions>
+			<TextBlock
+				Name="FileNameTextBlock"
+				Grid.Column="0"
+				Validation.ErrorTemplate="{x:Null}">
+				
+				<TextBlock.Text>
+					<Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+						<Binding.ValidationRules>
+							<DataErrorValidationRule />
+						</Binding.ValidationRules>
+					</Binding>
+				</TextBlock.Text>
+				</TextBlock>
+			<Button
+				Grid.Column="1"
+				Name="RemoveButton"
+				Style="{StaticResource EmptyBackgroundButton}"
+				Width="20"
+				Height="20"
+				HorizontalAlignment="Right"
+				Command="{Binding ElementName=FilesListView, Path=DataContext.RemoveCommand}"
+				CommandParameter="{Binding}"
+				Visibility="Visible">
+				<Image Source="Resources/clear.png" />
+			</Button>
+		</Grid>
+		<DataTemplate.Triggers>
+			<Trigger Property="IsMouseOver" Value="False">
+				<Setter TargetName="RemoveButton" Property="Button.Visibility" Value="Hidden" />
+			</Trigger>
+			<Trigger SourceName="FileNameTextBlock" Property="Validation.HasError" Value="True">
+				<Setter TargetName="ListViewItemGrid" Property="Background" Value="#FEEEEE"/>
+			</Trigger>
+		</DataTemplate.Triggers>
+	</DataTemplate>
+
+</ResourceDictionary>
