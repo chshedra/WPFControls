@@ -12,6 +12,9 @@ namespace WPFControls.Model
         /// </summary>
         public ObservableCollection<File> FilesList { get; set; }
 
+        /// <summary>
+        /// Создает объект модели
+        /// </summary>
         public FilesListModel()
         {
             FilesList = new ObservableCollection<File>();

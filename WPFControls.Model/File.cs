@@ -23,6 +23,7 @@ namespace WPFControls.Model
 			NotifyPropertyChanged(nameof(Name));
 		}
 
+		/// <inheritdoc/>
 		public string this[string columnName]
 		{
 			get
@@ -41,6 +42,8 @@ namespace WPFControls.Model
 				return error;
 			}
 		}
+
+		/// <inheritdoc/>
 		public string Error => throw new NotImplementedException();
 	}
 }

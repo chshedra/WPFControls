@@ -29,8 +29,6 @@ namespace WPFControls.ViewModel
 	    /// <inheritdoc cref="FilesList"/>
         public ObservableCollection<File> FilesList { get; set; }
 
-        public File CurrentFile { get; set; }
-
 	    /// <summary>
         /// Создает объект модели представления списка файлов
         /// </summary>
@@ -62,6 +60,9 @@ namespace WPFControls.ViewModel
 			}
 		}
 
+        /// <summary>
+        /// Устанавливает и возвращает команду удаления имени файла
+        /// </summary>
         public RelayCommand RemoveCommand
         {
 	        get
@@ -75,6 +76,5 @@ namespace WPFControls.ViewModel
 	        }
 
         }
-
     }
 }

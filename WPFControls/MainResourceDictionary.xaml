@@ -9,17 +9,20 @@
 	</Style>
 
 	<DataTemplate x:Key="ListBoxItemTemplate">
-		<Grid Name ="ListViewItemGrid"
-		      Background="Transparent"> 
+		<Grid
+			Name="ListViewItemGrid"
+			Height="25"
+			Background="Transparent">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition />
-				<ColumnDefinition Width="20"/>
+				<ColumnDefinition Width="20" />
 			</Grid.ColumnDefinitions>
 			<TextBlock
 				Name="FileNameTextBlock"
 				Grid.Column="0"
+				Margin="3"
 				Validation.ErrorTemplate="{x:Null}">
-				
+
 				<TextBlock.Text>
 					<Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
 						<Binding.ValidationRules>
@@ -27,16 +30,16 @@
 						</Binding.ValidationRules>
 					</Binding>
 				</TextBlock.Text>
-				</TextBlock>
+			</TextBlock>
 			<Button
-				Grid.Column="1"
 				Name="RemoveButton"
-				Style="{StaticResource EmptyBackgroundButton}"
-				Width="20"
-				Height="20"
+				Grid.Column="1"
+				Width="15"
+				Height="15"
 				HorizontalAlignment="Right"
 				Command="{Binding ElementName=FilesListView, Path=DataContext.RemoveCommand}"
 				CommandParameter="{Binding}"
+				Style="{StaticResource EmptyBackgroundButton}"
 				Visibility="Visible">
 				<Image Source="Resources/clear.png" />
 			</Button>
@@ -46,7 +49,7 @@
 				<Setter TargetName="RemoveButton" Property="Button.Visibility" Value="Hidden" />
 			</Trigger>
 			<Trigger SourceName="FileNameTextBlock" Property="Validation.HasError" Value="True">
-				<Setter TargetName="ListViewItemGrid" Property="Background" Value="#FEEEEE"/>
+				<Setter TargetName="ListViewItemGrid" Property="Background" Value="#FEEEEE" />
 			</Trigger>
 		</DataTemplate.Triggers>
 	</DataTemplate>

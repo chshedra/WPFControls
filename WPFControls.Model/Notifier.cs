@@ -7,9 +7,14 @@ namespace WPFControls.Model
 	/// </summary>
 	public class Notifier : INotifyPropertyChanged
 	{
+		/// <inheritdoc/>
 		public event PropertyChangedEventHandler
 			PropertyChanged = delegate { };
 
+		/// <summary>
+		/// Уведомляет об изменении свойства
+		/// </summary>
+		/// <param name="propertyName">Название измененного свойства </param>
 		protected void NotifyPropertyChanged(string propertyName)
 		{
 			PropertyChanged(this,

@@ -12,6 +12,5 @@ namespace WPFControls.ViewModel
 		/// Хранит список отображаемых имен файлов
 		/// </summary>
 		ObservableCollection<File> FilesList { get; set; }
-
 	}
 }

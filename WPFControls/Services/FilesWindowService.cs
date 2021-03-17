@@ -1,12 +1,15 @@
 ﻿using Microsoft.Win32;
+using WPFControls.ViewModel;
 
-namespace WPFControls.ViewModel
+namespace WPFControls.Services
 {
+	/// <inheritdoc/>
 	public class FilesWindowService : IFilesWindowService
 	{
+		/// <inheritdoc/>
 		public string FileName { get; set; }
 
-		
+		/// <inheritdoc/>
 		public bool OpenFileDialog()
 		{
 			OpenFileDialog openFileDialog = new OpenFileDialog();
