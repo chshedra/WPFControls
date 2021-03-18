@@ -30,16 +30,6 @@ namespace WPFControls
 			this.DataContext = new FilesListVM(new FilesWindowService());
 		}
 
-		private void FilesListView_OnSizeChanged(object sender, SizeChangedEventArgs e)
-		{
-			var windowHeader = 50;
-			if (FilesListView.ActualHeight >= Window.ActualHeight - AddButton.ActualHeight - windowHeader &&
-			    FilesListView.MaxHeight >= FilesListView.ActualHeight)
-			{
-				FilesListView.MaxHeight = FilesListView.ActualHeight;
-			}
-		}
-
 		private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)
 		{
 			var windowHeader = 50;

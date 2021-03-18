@@ -20,20 +20,21 @@
 			<RowDefinition Name="FileListViewRow" Height="Auto" />
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
-		<ListView
+		<Grid Grid.Row="0">
+			<ListView
 			Name="FilesListView"
 			Grid.Row="0"
 			HorizontalContentAlignment="Stretch"
 			ItemTemplate="{StaticResource ListBoxItemTemplate}"
-			ItemsSource="{Binding FilesList}"
-			SizeChanged="FilesListView_OnSizeChanged">
+			ItemsSource="{Binding FilesList}">
 			<ListView.ItemContainerStyle>
 				<Style TargetType="ListBoxItem">
 					<Setter Property="Padding" Value="0" />
 				</Style>
 			</ListView.ItemContainerStyle>
 		</ListView>
-		<Button
+			</Grid>
+				<Button
 			Name="AddButton"
 			Grid.Row="1"
 			Width="30"
