@@ -4,7 +4,7 @@ using WPFControls.Model;
 namespace WPFControls.ViewModel
 {
     /// <inheritdoc cref="IFilesListVM"/>
-    public class FilesListVM : Notifier, IFilesListVM
+    public class FilesListVM :  Notifier, IFilesListVM
     {
 	    /// <summary>
         /// Хранит объект модели
