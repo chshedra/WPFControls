@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using WPFControls.Model;
+using WPFControls.ViewModel;
+using WPFControls.IService;
 
-namespace WPFControls.ViewModel
+namespace WPFControls.ViewModel.ViewModels
 {
     /// <inheritdoc cref="IFilesListVM"/>
     public class FilesListVM :  Notifier, IFilesListVM

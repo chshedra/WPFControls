@@ -1,5 +1,4 @@
-﻿namespace WPFControls.ViewModel
-{
+﻿namespace WPFControls.IService
 	/// <summary>
 	/// Сервис вызова окна файлов
 	/// </summary>

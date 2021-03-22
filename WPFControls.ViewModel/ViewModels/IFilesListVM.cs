@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using WPFControls.Model;
 
-namespace WPFControls.ViewModel
+namespace WPFControls.ViewModel.ViewModels
 {
 	/// <summary>
 	/// Модель представления списка файлов
