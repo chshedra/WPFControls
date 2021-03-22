@@ -1,12 +1,13 @@
 ﻿using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using WPFControls.Model;
-using WPFControls.ViewModel;
 using WPFControls.ViewModel.IServices;
 
 namespace WPFControls.ViewModel.ViewModels
 {
     /// <inheritdoc cref="IFilesListVM"/>
-    public class FilesListVM :  Notifier, IFilesListVM
+    public class FilesListVM :  ViewModelBase, IFilesListVM
     {
 	    /// <summary>
         /// Хранит объект модели
@@ -26,7 +27,7 @@ namespace WPFControls.ViewModel.ViewModels
         /// <summary>
         /// Хранит команду удаления имени файла
         /// </summary>
-        private RelayCommand _removeCommand;
+        private RelayCommand<File> _removeCommand;
 
 	    /// <inheritdoc cref="FilesList"/>
         public ObservableCollection<File> FilesList { get; set; }
@@ -50,13 +51,13 @@ namespace WPFControls.ViewModel.ViewModels
 			get
 			{
 				return _addCommand ??
-				       (_addCommand = new RelayCommand(obj =>
+				       (_addCommand = new RelayCommand(() =>
 				       {
 					       if (_filesWindowService.OpenFileDialog())
 					       {
 						       _model.FilesList.Add(new File(_filesWindowService.FileName));
                                FilesList = _model.FilesList;
-                               NotifyPropertyChanged(nameof(FilesList));
+                               RaisePropertyChanged(nameof(FilesList));
 					       }
 				       }));
 			}
@@ -65,16 +66,17 @@ namespace WPFControls.ViewModel.ViewModels
         /// <summary>
         /// Устанавливает и возвращает команду удаления имени файла
         /// </summary>
-        public RelayCommand RemoveCommand
+        public RelayCommand<File> RemoveCommand
         {
 	        get
 	        {
 		        return _removeCommand ??
-		               (_removeCommand = new RelayCommand(obj =>
-		               {
-			               _model.FilesList.Remove((File)obj);
-			               FilesList = _model.FilesList;
-		               }));
+		               (_removeCommand = new RelayCommand<File>(
+			               (obj) =>
+			               {
+				               _model.FilesList.Remove(obj);
+				               FilesList = _model.FilesList;
+			               }));
 	        }
 
         }

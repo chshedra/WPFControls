@@ -6,7 +6,7 @@ namespace WPFControls.ViewModel.ViewModels
 	/// <summary>
 	/// Модель представления списка файлов
 	/// </summary>
-	public interface IFilesListVM
+	public interface IFilesListVM 
 	{
 		/// <summary>
 		/// Хранит список отображаемых имен файлов
