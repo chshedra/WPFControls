@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using WPFControls.Model;
 using WPFControls.ViewModel;
-using WPFControls.IService;
+using WPFControls.ViewModel.IServices;
 
 namespace WPFControls.ViewModel.ViewModels
 {

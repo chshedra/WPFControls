@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using WPFControls.ViewModel;
+using WPFControls.ViewModel.IServices;
 
 namespace WPFControls.Services
 {
