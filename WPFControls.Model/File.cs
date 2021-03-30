@@ -45,5 +45,8 @@ namespace WPFControls.Model
 
 		/// <inheritdoc/>
 		public string Error => throw new NotImplementedException();
+
+		/// <inheritdoc/>
+		public override string ToString() => Name;
 	}
 }

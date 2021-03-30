@@ -55,7 +55,12 @@ namespace WPFControls.ViewModel.ViewModels
 				       {
 					       if (_filesWindowService.OpenFileDialog())
 					       {
-						       _model.FilesList.Add(new File(_filesWindowService.FileName));
+                               _model.FilesList.Clear();
+
+                               foreach(string file in _filesWindowService.FileNames)
+                               {
+									_model.FilesList.Add(new File(file));
+                               }
                                FilesList = _model.FilesList;
                                RaisePropertyChanged(nameof(FilesList));
 					       }
@@ -75,6 +80,7 @@ namespace WPFControls.ViewModel.ViewModels
 			               (obj) =>
 			               {
 				               _model.FilesList.Remove(obj);
+				               _filesWindowService.FileNames.Remove(obj.ToString());
 				               FilesList = _model.FilesList;
 			               }));
 	        }
