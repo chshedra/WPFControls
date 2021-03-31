@@ -3,6 +3,7 @@ using WPFControls.Model;
 
 namespace WPFControls.ViewModel.ViewModels
 {
+	//TODO: Зачем этот интерфейс?
 	/// <summary>
 	/// Модель представления списка файлов
 	/// </summary>
