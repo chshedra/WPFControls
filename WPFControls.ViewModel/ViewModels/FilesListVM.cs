@@ -6,8 +6,10 @@ using WPFControls.ViewModel.IServices;
 
 namespace WPFControls.ViewModel.ViewModels
 {
-    /// <inheritdoc cref="IFilesListVM"/>
-    public class FilesListVM :  ViewModelBase, IFilesListVM
+    /// <summary>
+    /// Модель представления списка файлов
+    /// </summary>
+    public class FilesListVM :  ViewModelBase
     {
 	    /// <summary>
         /// Хранит объект модели
@@ -29,7 +31,9 @@ namespace WPFControls.ViewModel.ViewModels
         /// </summary>
         private RelayCommand<File> _removeCommand;
 
-	    /// <inheritdoc cref="FilesList"/>
+	    /// <summary>
+        /// Возвращает и устанавливает список файлов
+        /// </summary>
         public ObservableCollection<File> FilesList { get; set; }
 
 	    /// <summary>

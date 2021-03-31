@@ -59,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModels\FilesListVM.cs" />
-    <Compile Include="ViewModels\IFilesListVM.cs" />
     <Compile Include="IServices\IFilesWindowService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

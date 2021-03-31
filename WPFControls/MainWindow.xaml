@@ -22,7 +22,7 @@
 		</Grid.RowDefinitions>
 		<Grid Grid.Row="0">
 			<ListView
-				MaxHeight="{c:Binding ElementName=MainGrid, Path=ActualHeight-40}"
+				MaxHeight="{c:Binding ElementName=MainGrid, Path= '(ActualHeight > 0) ? (ActualHeight - 40) : 0'}"
 				Name="FilesListView"
 				HorizontalContentAlignment="Stretch"
 				VerticalContentAlignment="Stretch"

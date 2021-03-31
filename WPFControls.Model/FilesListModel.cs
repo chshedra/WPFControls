@@ -10,15 +10,8 @@ namespace WPFControls.Model
         /// <summary>
         /// Хранит список названий файлов
         /// </summary>
-        public ObservableCollection<File> FilesList { get; set; }
+        public ObservableCollection<File> FilesList { get; set; } = new ObservableCollection<File>();
         
-        //TODO: Зачем конструктор по-умолчанию, если можно сразу присвоить свойству?
-        /// <summary>
-        /// Создает объект модели
-        /// </summary>
-        public FilesListModel()
-        {
-            FilesList = new ObservableCollection<File>();
-        }
+        //TODO: +Зачем конструктор по-умолчанию, если можно сразу присвоить свойству?
     }
 }
