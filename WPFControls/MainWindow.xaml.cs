@@ -12,7 +12,7 @@ namespace WPFControls
 		public MainWindow()
 		{
 			InitializeComponent();
-			//TODO: +В ListView написано вот так Path=ActualHeight-40 - что это? О_О
+
 			this.DataContext = new FilesListVM(new FilesWindowService());
 		}
 	}

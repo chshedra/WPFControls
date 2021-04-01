@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 
 namespace WPFControls.Model
 {
-	//TODO:+ Это уже не просто File, а файл VM, поэтому есть смысл или создать отдельный fileVM ...
-	//... или выкосить нотифаер и подключить уже тут MVVMLight, что тоже не очень хорошо, в общем - примите какое-то решение и давайте обсудим уже очно
 	/// <summary>
 	/// Информация о файле
 	/// </summary>
 	public class File : IDataErrorInfo
 	{
+		//TODO: private set
 		/// <summary>
 		/// Имя файла
 		/// </summary>
@@ -27,13 +27,10 @@ namespace WPFControls.Model
 
 		/// <inheritdoc/>
 		public string this[string columnName] =>
-			//TODO: +Лучше в отдельный метод, в котором будут перечислены списком расширения и также формировать ...
-			//... с помощью этого списка результирующее сообщение об ошибке
 			columnName == nameof(Name) 
 				?CheckFileExtension()
 				:string.Empty;
 
-		//TODO: +Писал уже в NoteApp - сомнительная практика кидать тут исключение.
 		/// <inheritdoc/>
 		public string Error => string.Empty;
 
@@ -43,8 +40,6 @@ namespace WPFControls.Model
 		/// <returns>Сообщение об ошибке</returns>
 		private string CheckFileExtension()
 		{
-			var isCorrectExtension = false;
-
 			var extensions = new List<string>()
 			{
 				".exe",
@@ -53,15 +48,14 @@ namespace WPFControls.Model
 
 			foreach (var extension in extensions)
 			{
-				if (Name.Substring(Name.Length - 4) == extension)
+				FileInfo tmpFile = new FileInfo(Name);
+				if (tmpFile.Extension == extension)
 				{
-					isCorrectExtension = true;
+					return string.Empty;
 				}
 			}
 
-			return isCorrectExtension
-				? string.Empty
-				: CreateErrorMessage(extensions);
+			return CreateErrorMessage(extensions);
 		}
 
 		/// <summary>
