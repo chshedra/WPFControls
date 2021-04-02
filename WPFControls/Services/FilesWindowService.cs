@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
-using GalaSoft.MvvmLight;
 using Microsoft.Win32;
 using WPFControls.ViewModel.IServices;
 
@@ -17,9 +15,12 @@ namespace WPFControls.Services
 		/// <inheritdoc/>
 		public bool OpenFileDialog()
 		{
-			OpenFileDialog openFileDialog = new OpenFileDialog();
-			openFileDialog.Multiselect = true;
-			openFileDialog.Filter = "All files (*.*)|*.*";
+			OpenFileDialog openFileDialog = new OpenFileDialog
+			{
+				Multiselect = true,
+				Filter = "All files (*.*)|*.*"
+			};
+
 			if (openFileDialog.ShowDialog() == true)
 			{
 				foreach (string file in openFileDialog.FileNames)

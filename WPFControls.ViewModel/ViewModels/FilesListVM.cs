@@ -14,7 +14,7 @@ namespace WPFControls.ViewModel.ViewModels
 	    /// <summary>
         /// Хранит объект модели
         /// </summary>
-	    private FilesListModel _model;
+	    private readonly FilesListModel _model;
 
         /// <summary>
         /// Хранит сервис открытия окна файлов
@@ -29,12 +29,13 @@ namespace WPFControls.ViewModel.ViewModels
         /// <summary>
         /// Хранит команду удаления имени файла
         /// </summary>
-        private RelayCommand<File> _removeCommand;
+        private RelayCommand<IFileVM> _removeCommand;
 
 	    /// <summary>
         /// Возвращает и устанавливает список файлов
         /// </summary>
-        public ObservableCollection<File> FilesList { get; set; }
+        public ObservableCollection<IFileVM> FilesList { get; set; } = 
+		    new ObservableCollection<IFileVM>();
 
 	    /// <summary>
         /// Создает объект модели представления списка файлов
@@ -43,8 +44,6 @@ namespace WPFControls.ViewModel.ViewModels
         {
             _model = new FilesListModel();
             _filesWindowService = filesWindowService;
-
-            FilesList = _model.FilesList;
         }
 
         /// <summary>
@@ -59,14 +58,13 @@ namespace WPFControls.ViewModel.ViewModels
 				       {
 					       if (_filesWindowService.OpenFileDialog())
 					       {
-                               _model.FilesList.Clear();
-
-                               foreach(string file in _filesWindowService.FileNames)
+                               foreach (string file in _filesWindowService.FileNames)
                                {
-									_model.FilesList.Add(new File(file));
+                                   _model.FilesList.Add(new File(file));
+	                               FilesList.Add(new FileVM(file));
                                }
-                               FilesList = _model.FilesList;
                                RaisePropertyChanged(nameof(FilesList));
+                               _filesWindowService.FileNames.Clear();
 					       }
 				       }));
 			}
@@ -75,17 +73,18 @@ namespace WPFControls.ViewModel.ViewModels
         /// <summary>
         /// Устанавливает и возвращает команду удаления имени файла
         /// </summary>
-        public RelayCommand<File> RemoveCommand
+        public RelayCommand<IFileVM> RemoveCommand
         {
 	        get
 	        {
 		        return _removeCommand ??
-		               (_removeCommand = new RelayCommand<File>(
+		               (_removeCommand = new RelayCommand<IFileVM>(
 			               (obj) =>
 			               {
-				               _model.FilesList.Remove(obj);
-				               _filesWindowService.FileNames.Remove(obj.ToString());
-				               FilesList = _model.FilesList;
+				               _model.FilesList.Remove(obj.ConvertToFile());
+				               FilesList.Remove(obj);
+
+				               RaisePropertyChanged(nameof(FilesList));
 			               }));
 	        }
 
