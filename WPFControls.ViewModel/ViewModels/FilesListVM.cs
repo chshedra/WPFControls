@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using WPFControls.Model;
@@ -44,6 +45,7 @@ namespace WPFControls.ViewModel.ViewModels
         {
             _model = new FilesListModel();
             _filesWindowService = filesWindowService;
+            FilesList.CollectionChanged += FileList_CollectionChanged;
         }
 
         /// <summary>
@@ -60,8 +62,7 @@ namespace WPFControls.ViewModel.ViewModels
 					       {
                                foreach (string file in _filesWindowService.FileNames)
                                {
-                                   _model.FilesList.Add(new File(file));
-	                               FilesList.Add(new FileVM(file));
+                                 FilesList.Add(new FileVM(file));
                                }
                                RaisePropertyChanged(nameof(FilesList));
                                _filesWindowService.FileNames.Clear();
@@ -81,13 +82,38 @@ namespace WPFControls.ViewModel.ViewModels
 		               (_removeCommand = new RelayCommand<IFileVM>(
 			               (obj) =>
 			               {
-				               _model.FilesList.Remove(obj.ConvertToFile());
 				               FilesList.Remove(obj);
 
 				               RaisePropertyChanged(nameof(FilesList));
 			               }));
 	        }
 
+        }
+
+        /// <summary>
+        /// Обработчик события изменения коллекции моделей представления файлов
+        /// </summary>
+        private void FileList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+	        switch (e.Action)
+	        {
+		        case NotifyCollectionChangedAction.Add:
+		        {
+			        foreach (var file in e.NewItems)
+			        {
+                        _model.FilesList.Add(file as File);
+			        }
+			        break;
+		        }
+		        case NotifyCollectionChangedAction.Remove:
+		        {
+			        foreach (var file in e.OldItems)
+			        {
+				        _model.FilesList.Remove(file as File);
+			        }
+                    break;
+		        }
+	        }
         }
     }
 }
