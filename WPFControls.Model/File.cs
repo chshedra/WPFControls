@@ -5,11 +5,10 @@
 	/// </summary>
 	public class File 
 	{
-		//TODO:+ private set
 		/// <summary>
 		/// Имя файла
 		/// </summary>
-		public string Name { get; private set; }
+		public string Name { get; }
 
 		/// <summary>
 		/// Создает экземпляр класса по заданному имени
